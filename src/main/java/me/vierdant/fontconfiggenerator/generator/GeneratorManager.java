@@ -1,10 +1,12 @@
 package me.vierdant.fontconfiggenerator.generator;
 
+import me.vierdant.fontconfiggenerator.generator.type.CatalogGenerator;
 import me.vierdant.fontconfiggenerator.generator.type.DefaultGenerator;
 import me.vierdant.fontconfiggenerator.generator.type.ItemsAdderGenerator;
 import me.vierdant.fontconfiggenerator.generator.type.OraxenGenerator;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 /**
@@ -35,6 +37,7 @@ public class GeneratorManager {
             this.baseUnicode = Integer.parseInt(this.baseUnicode.toString());
             this.ascent = Integer.parseInt(this.ascent.toString());
             this.height = Integer.parseInt(this.height.toString());
+
         } catch (NumberFormatException exception) {
             // if a given value can't be parsed as an integer
             this.safe = false;
@@ -65,8 +68,11 @@ public class GeneratorManager {
                 .generate();
         var itemsAdderGenerator = new ItemsAdderGenerator(files, this.directory, (Integer) this.baseUnicode, (Integer) this.ascent, (Integer) this.height)
                 .generate();
+        var catalogGenerator = new CatalogGenerator(files, this.directory, (Integer) this.baseUnicode)
+                .generate();
 
-        return defaultGenerator.isSuccess() && oraxenGenerator.isSuccess();
+        return defaultGenerator.isSuccess() && oraxenGenerator.isSuccess() &&
+                itemsAdderGenerator.isSuccess() && catalogGenerator.isSuccess();
     }
 
     /**
@@ -75,7 +81,9 @@ public class GeneratorManager {
      */
     private ArrayList<String> getFiles() {
         File folder = new File(this.directory);
-        File[] files = folder.listFiles();
+        // get files and filter them
+        File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".png"));
+
         ArrayList<String> list = new ArrayList<>();
         // go through the files list
         assert files != null;
