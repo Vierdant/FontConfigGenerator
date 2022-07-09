@@ -43,8 +43,8 @@ public class DefaultGenerator {
             chars.add((char)this.baseUnicode+"");
             partObject.put("chars", chars);
             partObject.put("file","generated/"+name);
-            partObject.put("ascent", ascent+"");
-            partObject.put("height", height+"");
+            partObject.put("ascent", ascent);
+            partObject.put("height", height);
             partObject.put("type", "bitmap");
             // add the object to outer array
             outerArray.add(partObject);
