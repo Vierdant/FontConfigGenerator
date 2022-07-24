@@ -38,17 +38,17 @@ public class ItemsAdderGenerator {
 
         // set up the info body entry
         HashMap<String, Object> bodyInfo = new HashMap<>();
-        bodyInfo.put("namespace", "generated");
+        bodyInfo.put("namespace", "product");
         fileBody.put("info", bodyInfo);
 
         for (String name : files) {
             // stores the entry body
             LinkedHashMap<String, Object> partObject = new LinkedHashMap<>();
             // generate the entry content
-            partObject.put("permission", "generated."+name.split("_")[1].split("\\.")[0]);
+            partObject.put("permission", "product."+name.split("_")[0].split("\\.")[0]);
             partObject.put("show_in_gui", true);
             partObject.put("suggest_in_command", false);
-            partObject.put("path", "generated/"+name);
+            partObject.put("path", "product/"+name);
             partObject.put("symbol", (char)this.baseUnicode+"");
             partObject.put("y_position", ascent);
             partObject.put("scale_ratio", height);

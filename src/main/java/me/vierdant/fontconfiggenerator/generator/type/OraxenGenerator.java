@@ -39,7 +39,7 @@ public class OraxenGenerator {
             // stores the entry body
             LinkedHashMap<String, Object> partObject = new LinkedHashMap<>();
             // generate the entry content
-            partObject.put("texture", "generated/"+name);
+            partObject.put("texture", "product/"+name);
             partObject.put("ascent", ascent);
             partObject.put("height", height);
             partObject.put("code", baseUnicode);

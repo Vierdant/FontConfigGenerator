@@ -42,7 +42,7 @@ public class DefaultGenerator {
             ArrayList<String> chars = new ArrayList<>();
             chars.add((char)this.baseUnicode+"");
             partObject.put("chars", chars);
-            partObject.put("file","generated/"+name);
+            partObject.put("file","product/"+name);
             partObject.put("ascent", ascent);
             partObject.put("height", height);
             partObject.put("type", "bitmap");
